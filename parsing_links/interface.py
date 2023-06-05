@@ -3,7 +3,7 @@ from parsing_links.argparse_web import args
 from parsing_links.parsing.HTMLParser import HTMLParser
 from parsing_links.parsing.PDFParser import PDFParser
 from parsing_links.parsing.parser import Parser
-from parsing_links.validator.validator import is_valid_url, validate_links
+from parsing_links.validator.validator import get_valid_url, validate_links
 from saver.saver import save_to_file
 
 
@@ -33,7 +33,7 @@ class Interface:
 
     def _add_HTML_args(self):
         url = args.url or input("Введіть посилання, наприклад: 'https://www.google.com': ")
-        while not is_valid_url(url):
+        while not get_valid_url(url):
             url = args.url or input(
                 "Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': ")
         endpoint = args.endpoint or input("Введіть ендпоінт, наприклад: '/search': ")
@@ -47,5 +47,5 @@ class Interface:
 
     def _get_result(self, do_parse: Parser):
         links = do_parse.get_links()
-        result = validate_links(links, args.url)
+        result = validate_links(links)
         save_to_file(*result)

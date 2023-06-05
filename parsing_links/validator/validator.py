@@ -1,30 +1,30 @@
-import urllib
-from urllib.parse import urljoin
 import requests
-from parsing_links.argparse_web import args
+from urllib.parse import urlparse
 
 
-def is_valid_url(url: str):
-    parsed_url = urllib.parse.urlparse(url)
-    return all([parsed_url.scheme, parsed_url.netloc])
+def get_valid_url(url):
+    if not url.startswith('http://') and not url.startswith('https://'):
+        url = 'http://' + url
+    return url
 
 
-def format_link(link: str, url: str):
-    if link.startswith("/url?q="):
-        link = link[7:]
-    if link.startswith("/"):
-        link = urljoin(url, link)
-    return link
-
-
-def validate_links(links: list, url: str = args.url):
+def validate_links(links):
     valid_links = []
-    invalid_links = []
+    broken_links = []
+
     for link in links:
-        link = format_link(link, url)
-        response = requests.get(link)
-        if response.status_code == 200:
-            valid_links.append(link)
-        else:
-            invalid_links.append(link)
-    return valid_links, invalid_links
+        link = get_valid_url(link)
+        if urlparse(link).netloc:
+            try:
+                response = requests.get(link)
+                if response.status_code == 200:
+                    valid_links.append(link)
+                    # logging.info('Valid link: %s', link)
+                else:
+                    broken_links.append(link)
+                    # logging.warning('Broken link: %s', link)
+            except:
+                broken_links.append(link)
+                # logging.error('Error occurred while checking link: %s', link)
+
+    return valid_links, broken_links

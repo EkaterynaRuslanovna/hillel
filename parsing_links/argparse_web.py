@@ -5,6 +5,6 @@ parser = argparse.ArgumentParser(description="Парсінг сайту або P
 parser.add_argument("--url", type=str, required=False, help="Аргумент URL, наприклад: http://www.google.com")
 parser.add_argument("--endpoint", type=str, required=False, help="Ендпоінт, наприклад: '/search'")
 parser.add_argument("--params", type=str, required=False, help="Параметри пошуку (пошуковий запит(JSON format) наприклад: {\"q\": \"Hillel\"})")
-parser.add_argument("--pdf", type=str, required=True, help="Шлях до PDF файлу")
+parser.add_argument("--pdf", type=str, required=False, help="Шлях до PDF файлу")
 
 args = parser.parse_args()
