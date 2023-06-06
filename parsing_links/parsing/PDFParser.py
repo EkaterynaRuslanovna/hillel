@@ -1,4 +1,6 @@
 import re
+
+import PyPDF2
 import pdfplumber
 from parsing_links.parsing.parser import Parser
 
@@ -13,9 +15,14 @@ class PDFParser(Parser):
         with pdfplumber.open(self.file_path) as pdf:
             for page in pdf.pages:
                 text = page.extract_text()
-                link_pattern = r'(https?://\S+)'
+                link_pattern = r'(https?://\S+[^\s\"\)])'
                 founded_links = re.findall(link_pattern, text)
-                links.extend(founded_links)
+                for link in founded_links:
+                    if link.count("http") > 1:
+                        split_links = link.split("/.")
+                        links.extend(split_links)
+                    else:
+                        links.append(link)
         return links
 
 

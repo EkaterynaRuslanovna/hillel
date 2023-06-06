@@ -13,5 +13,6 @@ from interface import Interface
 
 
 if __name__ == "__main__":
+
     parsing_session = Interface()
     parsing_session.run()

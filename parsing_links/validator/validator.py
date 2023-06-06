@@ -26,5 +26,4 @@ def validate_links(links):
             except:
                 broken_links.append(link)
                 # logging.error('Error occurred while checking link: %s', link)
-
     return valid_links, broken_links
