@@ -1,6 +1,4 @@
 import re
-
-import PyPDF2
 import pdfplumber
 from parsing_links.parsing.parser import Parser
 
