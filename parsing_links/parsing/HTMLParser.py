@@ -1,6 +1,9 @@
+import logging
+
 import requests
 from bs4 import BeautifulSoup
 from parsing_links.parsing.parser import Parser
+from parsing_links.logger.logger_configuration import logger
 
 
 class HTMLParser(Parser):
@@ -13,6 +16,7 @@ class HTMLParser(Parser):
     def get_links(self):
         response = self._get_response()
         if response.status_code == 200:
+            logger.info("Отримано всі лінки з посилання")
             return self._parse(response)
         return []
 
@@ -28,8 +32,3 @@ class HTMLParser(Parser):
             if href_attribute:
                 links.append(href_attribute)
         return links
-
-
-# a = HTMLParser("https://www.google.com", '/search', {"q": "Hillel"})
-# c = a.get_links()
-# print(c)

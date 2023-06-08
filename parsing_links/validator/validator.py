@@ -1,5 +1,6 @@
 import requests
 from urllib.parse import urlparse
+from parsing_links.logger.logger_configuration import logger
 
 
 def get_valid_url(url):
@@ -19,11 +20,11 @@ def validate_links(links):
                 response = requests.get(link)
                 if response.status_code == 200:
                     valid_links.append(link)
-                    # logging.info('Valid link: %s', link)
+                    logger.info('Валідна лінка: %s', link)
                 else:
                     broken_links.append(link)
-                    # logging.warning('Broken link: %s', link)
+                    logger.warning('Не валідна лінка: %s', link)
             except:
                 broken_links.append(link)
-                # logging.error('Error occurred while checking link: %s', link)
+                logger.error('Неочікувана помилка, лінка не валідна: %s', link)
     return valid_links, broken_links

@@ -10,9 +10,12 @@ python main.py -url www.google.com
 
 """
 from interface import Interface
+from parsing_links.logger.logger_configuration import logger
 
 
 if __name__ == "__main__":
-
-    parsing_session = Interface()
-    parsing_session.run()
+    try:
+        parsing_session = Interface()
+        parsing_session.run()
+    except Exception as error:
+        logger.critical(error)

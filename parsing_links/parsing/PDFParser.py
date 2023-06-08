@@ -1,6 +1,7 @@
 import re
 import pdfplumber
 from parsing_links.parsing.parser import Parser
+from parsing_links.logger.logger_configuration import logger
 
 
 class PDFParser(Parser):
@@ -21,9 +22,5 @@ class PDFParser(Parser):
                         links.extend(split_links)
                     else:
                         links.append(link)
+        logger.info("Отримано всі лінки з pdf файлу")
         return links
-
-
-# a = PDFParser("links.pdf")
-# c = a.get_links()
-# print(c)
