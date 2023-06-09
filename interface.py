@@ -1,5 +1,3 @@
-import requests
-
 from argparse_web import args
 from parsing.HTMLParser import HTMLParser
 from parsing.PDFParser import PDFParser
