@@ -1,6 +1,6 @@
 import requests
 from urllib.parse import urlparse
-from parsing_links.logger.logger_configuration import logger
+from logger.logger_configuration import logger
 
 
 def get_valid_url(url):

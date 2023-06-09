@@ -1,11 +1,11 @@
 import json
-from parsing_links.argparse_web import args
-from parsing_links.parsing.HTMLParser import HTMLParser
-from parsing_links.parsing.PDFParser import PDFParser
-from parsing_links.parsing.parser import Parser
-from parsing_links.validator.validator import get_valid_url, validate_links
+from argparse_web import args
+from parsing.HTMLParser import HTMLParser
+from parsing.PDFParser import PDFParser
+from parsing.parser import Parser
+from validator.validator import get_valid_url, validate_links
 from saver.saver import save_to_file
-from parsing_links.logger.logger_configuration import logger
+from logger.logger_configuration import logger
 
 
 class Interface:
@@ -18,7 +18,7 @@ class Interface:
                     'Оберіть, що будемо парсити: (1 - сайт, 2 - PDF документ, 3 - вихід): ')
                 if command == "1":
                     html_args = self._add_HTML_args()
-                    do_parse = HTMLParser(*html_args)
+                    do_parse = HTMLParser(html_args)
                     self._get_result(do_parse)
                     print("Лінки успішно записані")
                 elif command == "2":
@@ -39,10 +39,7 @@ class Interface:
         while not get_valid_url(url):
             url = args.url or input(
                 "Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': ")
-        endpoint = args.endpoint or input("Введіть ендпоінт, наприклад: '/search': ")
-        params_input = args.params or input("Введіть параметр, наприклад: {\"q\": \"Hillel\"} (JSON format): ")
-        params = json.loads(params_input) if params_input else {}
-        return url, endpoint, params
+        return url
 
     def _add_PDF_args(self):
         file_path = args.pdf or input("Введіть шлях до файлу, наприклад: 'files/links.pdf': ")

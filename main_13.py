@@ -10,7 +10,7 @@ python main.py -url www.google.com
 
 """
 from interface import Interface
-from parsing_links.logger.logger_configuration import logger
+from logger.logger_configuration import logger
 
 
 if __name__ == "__main__":

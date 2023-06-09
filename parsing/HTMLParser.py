@@ -1,17 +1,13 @@
-import logging
-
 import requests
 from bs4 import BeautifulSoup
-from parsing_links.parsing.parser import Parser
-from parsing_links.logger.logger_configuration import logger
+from parsing.parser import Parser
+from logger.logger_configuration import logger
 
 
 class HTMLParser(Parser):
 
-    def __init__(self, url: str, endpoint: str = "", params=None):
+    def __init__(self, url: str):
         self.url = url
-        self.endpoint = endpoint
-        self.params = params if params is not None else {}
 
     def get_links(self):
         response = self._get_response()
@@ -21,7 +17,7 @@ class HTMLParser(Parser):
         return []
 
     def _get_response(self):
-        response = requests.get(self.url + self.endpoint, self.params)
+        response = requests.get(self.url)
         return response
 
     def _parse(self, response: requests.models.Response):
