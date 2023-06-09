@@ -1,8 +1,10 @@
+import requests
+
 from argparse_web import args
 from parsing.HTMLParser import HTMLParser
 from parsing.PDFParser import PDFParser
 from parsing.parser import Parser
-from validator.validator import get_valid_url, validate_links
+from validator.validator import get_valid_url, validate_links, check_file_exists, is_valid_url
 from saver.saver import save_to_file
 from logger.logger_configuration import logger
 
@@ -34,14 +36,22 @@ class Interface:
                 logger.critical(error)
 
     def _add_HTML_args(self):
-        url = args.url or input("Введіть посилання, наприклад: 'https://www.google.com': ")
-        while not get_valid_url(url):
-            url = args.url or input(
-                "Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': ")
+        if args.url:
+            url = args.url
+        else:
+            url = input("Введіть посилання, наприклад: 'https://www.google.com': ")
+        while not is_valid_url(url):
+            url = input("Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': ")
+            is_valid_url(url)
         return url
 
     def _add_PDF_args(self):
-        file_path = args.pdf or input("Введіть шлях до файлу, наприклад: 'files/links.pdf': ")
+        if args.pdf:
+            file_path = args.pdf
+        else:
+            file_path = input("Введіть шлях до файлу, наприклад: 'files/links.pdf': ")
+        while not check_file_exists(file_path):
+            file_path = input("Введений файл не існує, спробуйте запис наприклад: 'files/links.pdf': ")
         return file_path
 
     def _get_result(self, do_parse: Parser):

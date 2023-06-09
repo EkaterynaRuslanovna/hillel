@@ -1,6 +1,9 @@
+import urllib
+
 import requests
 from urllib.parse import urlparse
 from logger.logger_configuration import logger
+import os
 
 
 def get_valid_url(url):
@@ -28,3 +31,12 @@ def validate_links(links):
                 broken_links.append(link)
                 logger.error('Неочікувана помилка, лінка не валідна: %s', link)
     return valid_links, broken_links
+
+
+def check_file_exists(file_path):
+    return os.path.isfile(file_path)
+
+
+def is_valid_url(url: str):
+    parsed_url = urllib.parse.urlparse(url)
+    return all([parsed_url.scheme, parsed_url.netloc])
