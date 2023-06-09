@@ -2,7 +2,7 @@ from argparse_web import args
 from parsing.HTMLParser import HTMLParser
 from parsing.PDFParser import PDFParser
 from parsing.parser import Parser
-from validator.validator import get_valid_url, validate_links, check_file_exists, is_valid_url
+from validator.validator import validate_links, check_file_exists, is_valid_url
 from saver.saver import save_to_file
 from logger.logger_configuration import logger
 

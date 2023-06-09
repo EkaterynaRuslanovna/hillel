@@ -1,5 +1,4 @@
 import urllib
-
 import requests
 from urllib.parse import urlparse
 from logger.logger_configuration import logger
