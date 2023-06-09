@@ -14,7 +14,7 @@ class PDFParser(Parser):
         with pdfplumber.open(self.file_path) as pdf:
             for page in pdf.pages:
                 text = page.extract_text()
-                link_pattern = r'(https?://\S+[^\s\"\)])'
+                link_pattern = r'(https?://\S+[^\s\"\)\,\.])'
                 founded_links = re.findall(link_pattern, text)
                 for link in founded_links:
                     if link.count("http") > 1:
