@@ -1,14 +1,9 @@
 import pytest
 import requests
 from parsing.HTMLParser import HTMLParser
-from tests.src.data import url
 
 
 class TestHTMLParser:
-
-    @pytest.fixture
-    def html_parser(self):
-        return HTMLParser(url)
 
     def test_get_links_returns_list(self, html_parser):
         """

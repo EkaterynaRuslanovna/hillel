@@ -47,9 +47,9 @@ class Interface:
         if args.pdf:
             file_path = args.pdf
         else:
-            file_path = input("Введіть шлях до файлу, наприклад: 'files/links.pdf': ")
+            file_path = input("Введіть шлях до файлу, наприклад: 'src/links.pdf': ")
         while not check_file_exists(file_path):
-            file_path = input("Введений файл не існує, спробуйте запис наприклад: 'files/links.pdf': ")
+            file_path = input("Введений файл не існує, спробуйте запис наприклад: 'src/links.pdf': ")
         return file_path
 
     def _get_result(self, do_parse: Parser):

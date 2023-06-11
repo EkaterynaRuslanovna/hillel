@@ -4,9 +4,6 @@ from tests.src.data import pdf_path
 
 
 class TestPDFParser:
-    @pytest.fixture
-    def pdf_parser(self):
-        return PDFParser(pdf_path)
 
     def test_get_links_returns_list(self, pdf_parser):
         """
