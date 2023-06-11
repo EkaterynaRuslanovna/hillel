@@ -26,9 +26,13 @@ def validate_links(links):
                 else:
                     broken_links.append(link)
                     logger.warning('Не валідна лінка: %s', link)
-            except:
+            except requests.exceptions.ConnectionError as error:
+                broken_links.append(link)
+                logger.warning('Не валідна лінка: %s', link)
+            except Exception as error:
                 broken_links.append(link)
                 logger.error('Неочікувана помилка, лінка не валідна: %s', link)
+                raise
     return valid_links, broken_links
 
 
