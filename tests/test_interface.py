@@ -1,7 +1,10 @@
 from unittest.mock import patch
 from io import StringIO
+import logging
+import pytest
 
 
+@pytest.mark.required
 def test_welcome_message(interface):
     """
     Перевіряємо вітальне повідомлення при запуску програми
@@ -13,9 +16,11 @@ def test_welcome_message(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Вітаємо!"
+        logging.info("test_welcome_message")
         assert expected_output in output.getvalue().strip()
 
 
+@pytest.mark.required
 def test_options(interface):
     """
     Перевіряємо, що виводиться повідомлення з вибором опцій
@@ -27,6 +32,7 @@ def test_options(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Оберіть, що будемо парсити: (1 - сайт, 2 - PDF документ, 3 - вихід): "
+        logging.info("test_options")
         assert expected_output in output.getvalue().strip()
 
 
@@ -42,9 +48,11 @@ def test_invalid_option(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Немає такої опції. Попробуйте знову."
+        logging.info("test_invalid_option")
         assert expected_output in output.getvalue().strip()
 
 
+@pytest.mark.required
 def test_html_option(interface):
     """
     Перевіряємо, що при виборі опції "1", виводиться повідомлення:
@@ -57,6 +65,7 @@ def test_html_option(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Введіть посилання, наприклад: 'https://www.google.com': "
+        logging.info("test_html_option")
         assert expected_output in output.getvalue().strip()
 
 
@@ -72,9 +81,11 @@ def test_invalid_html_link(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': "
+        logging.info("test_invalid_html_link")
         assert expected_output in output.getvalue().strip()
 
 
+@pytest.mark.required
 def test_pdf_option(interface):
     """
     Перевіряємо, що при виборі опції "2", виводиться повідомлення:
@@ -87,6 +98,7 @@ def test_pdf_option(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Введіть шлях до файлу, наприклад: 'src/links.pdf': "
+        logging.info("test_pdf_option")
         assert expected_output in output.getvalue().strip()
 
 
@@ -102,9 +114,11 @@ def test_invalid_pdf_path(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Введений файл не існує, спробуйте запис наприклад: 'src/links.pdf': "
+        logging.info("test_invalid_pdf_path")
         assert expected_output in output.getvalue().strip()
 
 
+@pytest.mark.required
 def test_links_successfully_saved(interface):
     """
     Перевіряємо повідомлення про успішний запис лінок
@@ -116,4 +130,5 @@ def test_links_successfully_saved(interface):
         with patch('builtins.input', side_effect=user_input.split()):
             interface.run()
         expected_output = "Лінки успішно записані"
+        logging.info("test_links_successfully_saved")
         assert expected_output in output.getvalue().strip()

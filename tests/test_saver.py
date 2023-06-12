@@ -1,10 +1,13 @@
+import logging
 import os
+import pytest
 from tests.src.data import data_valid_links, data_invalid_links
 from saver.saver import save_to_file
 
 
 class TestSaver:
 
+    @pytest.mark.required
     def test_save_to_file(self):
         """
         Перевіряємо, що шлях файлів існує та функція save_to_file() записує у них лінки
@@ -28,3 +31,5 @@ class TestSaver:
         with open(invalid_file_path, "r", encoding="utf-8") as invalid_file:
             saved_invalid_links = invalid_file.read().splitlines()
             assert saved_invalid_links == data_invalid_links
+
+        logging.info("test_save_to_file")

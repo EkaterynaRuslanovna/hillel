@@ -1,3 +1,5 @@
+import logging
+import pytest
 from validator.validator import get_valid_url, validate_links, check_file_exists, is_valid_url
 
 
@@ -12,7 +14,9 @@ class TestValidator:
         url = "google.com"
         expected = "http://google.com"
         assert get_valid_url(url) == expected
+        logging.info("test_get_valid_url")
 
+    @pytest.mark.required
     def test_validate_links(self):
         """
         Перевіряємо, що функція правильно розділяє валідні та невалідні посилання
@@ -28,6 +32,8 @@ class TestValidator:
         assert valid_links == expected_valid_links
         assert broken_links == expected_broken_links
 
+        logging.info("test_validate_links")
+
     def test_check_file_exists(self):
         """
         Перевіряємо, що функція повертає True, якщо файл існує, і False, якщо файл не існує
@@ -40,6 +46,8 @@ class TestValidator:
         non_existing_file = "non_existing_file.txt"
         assert check_file_exists(non_existing_file) is False
 
+        logging.info("test_check_file_exists")
+
     def test_is_valid_url(self):
         """
         Перевіряємо, що функція правильно визначає, чи є URL дійсним
@@ -51,3 +59,5 @@ class TestValidator:
 
         invalid_url = "/medium.com/"
         assert is_valid_url(invalid_url) is False
+
+        logging.info("test_is_valid_url")
