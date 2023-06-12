@@ -13,8 +13,8 @@ class Interface:
         print('Вітаємо!')
         while True:
             try:
-                command = input(
-                    'Оберіть, що будемо парсити: (1 - сайт, 2 - PDF документ, 3 - вихід): ')
+                print('Оберіть, що будемо парсити: (1 - сайт, 2 - PDF документ, 3 - вихід): ')
+                command = input()
                 if command == "1":
                     html_args = self._add_HTML_args()
                     do_parse = HTMLParser(html_args)
@@ -37,9 +37,11 @@ class Interface:
         if args.url:
             url = args.url
         else:
-            url = input("Введіть посилання, наприклад: 'https://www.google.com': ")
+            print("Введіть посилання, наприклад: 'https://www.google.com': ")
+            url = input()
         while not is_valid_url(url):
-            url = input("Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': ")
+            print("Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': ")
+            url = input()
             is_valid_url(url)
         return url
 
@@ -47,9 +49,11 @@ class Interface:
         if args.pdf:
             file_path = args.pdf
         else:
-            file_path = input("Введіть шлях до файлу, наприклад: 'src/links.pdf': ")
+            print("Введіть шлях до файлу, наприклад: 'src/links.pdf': ")
+            file_path = input()
         while not check_file_exists(file_path):
-            file_path = input("Введений файл не існує, спробуйте запис наприклад: 'src/links.pdf': ")
+            print("Введений файл не існує, спробуйте запис наприклад: 'src/links.pdf': ")
+            file_path = input()
         return file_path
 
     def _get_result(self, do_parse: Parser):
