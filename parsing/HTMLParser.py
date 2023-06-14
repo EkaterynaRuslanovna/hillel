@@ -13,10 +13,10 @@ class HTMLParser(Parser):
         try:
             response = self._get_response()
             if response.status_code == 200:
-                logger.info("Отримано всі лінки з посилання")
+                logger.info("Got all the links from the link")
                 return self._parse(response)
         except requests.exceptions.RequestException as error:
-            logger.error(f"Помилка при виконанні запиту: {str(error)}")
+            logger.error(f"Error executing the request: {str(error)}")
         return []
 
     def _get_response(self):
@@ -24,7 +24,7 @@ class HTMLParser(Parser):
             response = requests.get(self.url)
             return response
         except requests.exceptions.RequestException as error:
-            logger.error(f"Помилка при виконанні запиту: {str(error)}")
+            logger.error(f"Error executing the request: {str(error)}")
             raise requests.exceptions.RequestException(str(error))
 
     def _parse(self, response: requests.models.Response):
@@ -37,5 +37,5 @@ class HTMLParser(Parser):
                     links.append(href_attribute)
             return links
         except Exception as error:
-            logger.error(f"Помилка при парсингу HTML: {str(error)}")
+            logger.error(f"HTML parsing error: {str(error)}")
             return []

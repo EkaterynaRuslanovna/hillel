@@ -23,8 +23,8 @@ class PDFParser(Parser):
                             links.extend(split_links)
                         else:
                             links.append(link)
-            logger.info("Отримано всі лінки з pdf файлу")
+            logger.info("Received all links from the pdf file")
         except FileNotFoundError as error:
-            logger.error(f"Помилка при отриманні лінків з pdf файлу: {str(error)}")
+            logger.error(f"Error when receiving links from a pdf file: {str(error)}")
             raise
         return links

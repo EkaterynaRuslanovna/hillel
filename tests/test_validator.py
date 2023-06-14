@@ -7,7 +7,7 @@ class TestValidator:
 
     def test_get_valid_url(self):
         """
-        Перевіряємо, що функція додає "http://" до початку URL, якщо він не починається з "http://" або "https://"
+        Checking that the function adds "http://" to the beginning of the URL if it doesn't start with "http://" or "https://"
         :return: "http://" + url
         """
 
@@ -19,7 +19,7 @@ class TestValidator:
     @pytest.mark.required
     def test_validate_links(self):
         """
-        Перевіряємо, що функція правильно розділяє валідні та невалідні посилання
+        Verifying that the function correctly separates valid and invalid references
         :return:
         """
 
@@ -36,8 +36,8 @@ class TestValidator:
 
     def test_check_file_exists(self):
         """
-        Перевіряємо, що функція повертає True, якщо файл існує, і False, якщо файл не існує
-        :return: True - якщо існує файл, False - якщо не існує файлу
+        Tests that the function returns True if the file exists and False if the file does not exist
+        :return: True - if the file exists, False - if the file does not exist
         """
 
         existing_file = "src/links.pdf"
@@ -50,8 +50,8 @@ class TestValidator:
 
     def test_is_valid_url(self):
         """
-        Перевіряємо, що функція правильно визначає, чи є URL дійсним
-        :return: True - якщо URL є дійсним, False - якщо URL не є дійсним
+        Verify that the function correctly determines whether the URL is valid
+        :return: True - if the URL is valid, False - if the URL is not valid
         """
 
         valid_url = "https://medium.com/"

@@ -10,7 +10,7 @@ class TestHTMLParser:
     @pytest.mark.required
     def test_get_links_returns_list(self, html_parser):
         """
-        Перевіряємо, що функція get_links() вертає список
+        Checking that the get_links() function returns a list
         :param html_parser: fixture
         :return: type: list
         """
@@ -21,7 +21,7 @@ class TestHTMLParser:
 
     def test_len_list_of_links_more_than_0(self, html_parser):
         """
-        Перевіряємо, що список не пустий
+        Checking that the list is not empty
         :param html_parser: fixture
         :return: list: len of list more, than 0
         """
@@ -33,7 +33,7 @@ class TestHTMLParser:
     @pytest.mark.parametrize("url", invalid_links_list)
     def test_invalid_url(self, url):
         """
-        Перевіряємо, що при невірному посиланні викликається RequestException
+        Checking that a RequestException is thrown if the reference is invalid
         :param url: str (invalid)
         :return: requests.exceptions.RequestException
         """

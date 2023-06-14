@@ -10,26 +10,26 @@ from logger.logger_configuration import logger
 class Interface:
 
     def run(self):
-        print('Вітаємо!')
+        print('Welcome!')
         while True:
             try:
-                print('Оберіть, що будемо парсити: (1 - сайт, 2 - PDF документ, 3 - вихід): ')
+                print('Choose what you want to parse: (1 - site, 2 - PDF document, 3 - exit):')
                 command = input()
                 if command == "1":
                     html_args = self._add_HTML_args()
                     do_parse = HTMLParser(html_args)
                     self._get_result(do_parse)
-                    print("Лінки успішно записані")
+                    print("Links have been saved successfully")
                 elif command == "2":
                     pdf_args = self._add_PDF_args()
                     do_parse = PDFParser(pdf_args)
                     self._get_result(do_parse)
-                    print("Лінки успішно записані")
+                    print("Links have been saved successfully")
                 elif command == "3":
-                    print("Дякуємо, що обрали нас! До зустрічі:)")
+                    print("Thank you for choosing us! Bye:)")
                     break
                 else:
-                    print('Немає такої опції. Попробуйте знову.')
+                    print('There is no such option. Try again.')
             except Exception as error:
                 logger.critical(error)
 
@@ -37,10 +37,10 @@ class Interface:
         if args.url:
             url = args.url
         else:
-            print("Введіть посилання, наприклад: 'https://www.google.com': ")
+            print("Enter the link, for example: 'https://www.google.com':")
             url = input()
         while not is_valid_url(url):
-            print("Введене послилання невалідне, спробуйте запис наприклад: 'https://www.google.com': ")
+            print("The entered link is invalid, try an entry for example: 'https://www.google.com':")
             url = input()
             is_valid_url(url)
         return url
@@ -49,10 +49,10 @@ class Interface:
         if args.pdf:
             file_path = args.pdf
         else:
-            print("Введіть шлях до файлу, наприклад: 'src/links.pdf': ")
+            print("Enter the file path, for example: 'src/links.pdf':")
             file_path = input()
         while not check_file_exists(file_path):
-            print("Введений файл не існує, спробуйте запис наприклад: 'src/links.pdf': ")
+            print("The entered file does not exist, try writing for example: 'src/links.pdf':")
             file_path = input()
         return file_path
 
@@ -60,5 +60,5 @@ class Interface:
         links = do_parse.get_links()
         result = validate_links(links)
         save_to_file(*result)
-        logger.info("Записано всі валідні лінки у файл 'valid_links.txt'")
-        logger.info("Записано всі не валідні лінки у файл 'broken_links.txt'")
+        logger.info("All valid links are recorded in the file 'valid_links.txt'")
+        logger.info("Written all invalid links in the file 'broken_links.txt'")

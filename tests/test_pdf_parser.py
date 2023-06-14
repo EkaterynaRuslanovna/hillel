@@ -8,7 +8,7 @@ class TestPDFParser:
     @pytest.mark.required
     def test_get_links_returns_list(self, pdf_parser):
         """
-        Перевіряємо, що функція get_links() вертає список
+        Checking that the get_links() function returns a list
         :param pdf_parser: fixture
         :return: type: list
         """
@@ -19,7 +19,7 @@ class TestPDFParser:
 
     def test_len_list_of_links_more_than_0(self, pdf_parser):
         """
-        Перевіряємо, що список не пустий
+        Checking that the list is not empty
         :param pdf_parser: fixture
         :return: len of list more, than 0
         """
@@ -30,7 +30,7 @@ class TestPDFParser:
     @pytest.mark.required
     def test_get_links_with_exception(self):
         """
-        Перевіряємо, що при невірному шляху до файлу викликається FileNotFoundError
+        Checking that a FileNotFoundError is raised if the file path is incorrect
         :return: FileNotFoundError
         """
 

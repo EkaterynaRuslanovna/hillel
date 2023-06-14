@@ -10,10 +10,10 @@ class TestSaver:
     @pytest.mark.required
     def test_save_to_file(self):
         """
-        Перевіряємо, що шлях файлів існує та функція save_to_file() записує у них лінки
-        :param data_valid_links: list (список з валідними лінками)
-        :param data_invalid_links: list (список з не валідними лінками)
-        :return: у файл "valid_links.txt" записуються валідні лінки, у файл "broken_links.txt" записуються не валідні лінки
+        Checking that the file path exists and the save_to_file() function writes links to them
+        :param data_valid_links: list (list with valid links)
+        :param data_invalid_links: list (list with invalid links)
+        :return: valid links are written to the "valid_links.txt" file, invalid links are written to the "broken_links.txt" file
         """
         save_to_file(data_valid_links, data_invalid_links)
 
