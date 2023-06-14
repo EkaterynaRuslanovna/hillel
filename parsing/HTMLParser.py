@@ -10,21 +10,32 @@ class HTMLParser(Parser):
         self.url = url
 
     def get_links(self):
-        response = self._get_response()
-        if response.status_code == 200:
-            logger.info("Отримано всі лінки з посилання")
-            return self._parse(response)
+        try:
+            response = self._get_response()
+            if response.status_code == 200:
+                logger.info("Got all the links from the link")
+                return self._parse(response)
+        except requests.exceptions.RequestException as error:
+            logger.error(f"Error executing the request: {str(error)}")
         return []
 
     def _get_response(self):
-        response = requests.get(self.url)
-        return response
+        try:
+            response = requests.get(self.url)
+            return response
+        except requests.exceptions.RequestException as error:
+            logger.error(f"Error executing the request: {str(error)}")
+            raise requests.exceptions.RequestException(str(error))
 
     def _parse(self, response: requests.models.Response):
-        html_parser = BeautifulSoup(response.text, "html.parser")
-        links = []
-        for link in html_parser.find_all('a'):
-            href_attribute = link.get("href")
-            if href_attribute:
-                links.append(href_attribute)
-        return links
+        try:
+            html_parser = BeautifulSoup(response.text, "html.parser")
+            links = []
+            for link in html_parser.find_all('a'):
+                href_attribute = link.get("href")
+                if href_attribute:
+                    links.append(href_attribute)
+            return links
+        except Exception as error:
+            logger.error(f"HTML parsing error: {str(error)}")
+            return []

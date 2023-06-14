@@ -1,7 +1,14 @@
-def save_to_file(valid_links: list, invalid_links: list):
+import os
 
-    with open("files/valid_links.txt", "w", encoding="utf-8") as valid_file:
+
+def save_to_file(valid_links: list, invalid_links: list):
+    directory = os.path.dirname(os.path.abspath(__file__))
+
+    valid_file_path = os.path.join(directory, "..", "src", "valid_links.txt")
+    invalid_file_path = os.path.join(directory, "..", "src", "broken_links.txt")
+
+    with open(valid_file_path, "w", encoding="utf-8") as valid_file:
         valid_file.write("\n".join(valid_links))
 
-    with open("files/broken_links.txt", "w", encoding="utf-8") as invalid_file:
+    with open(invalid_file_path, "w", encoding="utf-8") as invalid_file:
         invalid_file.write("\n".join(invalid_links))
