@@ -1,6 +1,6 @@
 import logging
 import pytest
-from parsing.PDFParser import PDFParser
+from parsing.pdf_parser import PdfParser
 
 
 class TestPDFParser:
@@ -30,11 +30,12 @@ class TestPDFParser:
     @pytest.mark.required
     def test_get_links_with_exception(self):
         """
-        Checking that a FileNotFoundError is raised if the file path is incorrect
+        Checking that a FileNotFoundError
+        is raised if the file path is incorrect
         :return: FileNotFoundError
         """
 
-        pdf_parser = PDFParser("/path/to/nonexistent.pdf")
+        pdf_parser = PdfParser("/path/to/nonexistent.pdf")
 
         with pytest.raises(FileNotFoundError):
             pdf_parser.get_links()

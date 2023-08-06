@@ -4,7 +4,7 @@ from parsing.parser import Parser
 from logger.logger_configuration import logger
 
 
-class PDFParser(Parser):
+class PdfParser(Parser):
 
     def __init__(self, file_path: str):
         self.file_path = file_path
@@ -25,6 +25,6 @@ class PDFParser(Parser):
                             links.append(link)
             logger.info("Received all links from the pdf file")
         except FileNotFoundError as error:
-            logger.error(f"Error when receiving links from a pdf file: {str(error)}")
+            logger.error(f"Error receiving PDF file: {str(error)}")
             raise
         return links

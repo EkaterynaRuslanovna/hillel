@@ -1,4 +1,3 @@
-import urllib
 import requests
 from urllib.parse import urlparse
 from logger.logger_configuration import logger
@@ -26,10 +25,10 @@ def validate_links(links):
                 else:
                     broken_links.append(link)
                     logger.warning('Invalid link: %s', link)
-            except requests.exceptions.ConnectionError as error:
+            except requests.exceptions.ConnectionError:
                 broken_links.append(link)
                 logger.warning('Invalid link: %s', link)
-            except Exception as error:
+            except Exception:
                 broken_links.append(link)
                 logger.error('Unexpected error, invalid link: %s', link)
                 raise
@@ -41,5 +40,5 @@ def check_file_exists(file_path):
 
 
 def is_valid_url(url: str):
-    parsed_url = urllib.parse.urlparse(url)
+    parsed_url = urlparse(url)
     return all([parsed_url.scheme, parsed_url.netloc])

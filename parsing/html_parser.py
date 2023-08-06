@@ -4,7 +4,7 @@ from parsing.parser import Parser
 from logger.logger_configuration import logger
 
 
-class HTMLParser(Parser):
+class HtmlParser(Parser):
 
     def __init__(self, url: str):
         self.url = url

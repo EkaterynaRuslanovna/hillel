@@ -1,7 +1,7 @@
 import logging
 import pytest
 import requests
-from parsing.HTMLParser import HTMLParser
+from parsing.html_parser import HtmlParser
 from tests.src.data import invalid_links_list
 
 
@@ -38,7 +38,7 @@ class TestHTMLParser:
         :return: requests.exceptions.RequestException
         """
 
-        parser = HTMLParser(url)
+        parser = HtmlParser(url)
         parser.get_links()
 
         with pytest.raises(requests.exceptions.RequestException):
