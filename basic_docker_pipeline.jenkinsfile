@@ -1,5 +1,10 @@
 pipeline {
-    agent { /usr/local/bin/docker  { image 'python:3.10.1-alpine' } }
+    agent {
+        docker {
+            image 'python:3.10.1-alpine'
+            args '-v /usr/local/bin/docker:/usr/local/bin/docker'
+        }
+    }
     stages {
         stage('build') {
             steps {
